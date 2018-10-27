@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container" style="margin-top: 100px;">
+<center><a href="/address" class="btn btn-default">Generate Address</a></center>
+ <div class="form-group">
+      <label >Generated Address:</label>
+      <input type="text" class="form-control"  placeholder="Address" value="<%= User.last&.address %>">
+    </div>
+</div>
+
+<div class="container">
+  <h2>Check Balance</h2>
+  <form action="/balance">
+    <div class="form-group">
+      <label >Check Balance:</label>
+      <input type="text" class="form-control" name="address" placeholder="Address" >
+    </div>
+    <center><button type="submit" class="btn btn-default">Check Address Balance</button></center>
+  </form>
+</div>
+<% if User.last&.balance.present? %>
+<center><h2>Your balance is-: "<%= User.last&.balance %>"</h2></center>
+<% else %>
+<center><h2>Your balance is-: 0</h2></center>
+<% end %>
+</body>
+</html>
