@@ -82,4 +82,31 @@ class HomesController < ApplicationController
 			user.update(balance: response["result"]["balance"]/10**12.to_f)
 			redirect_to root_path(id: user&.id)
 	end
+
+	def random_address
+		a = SecureRandom.hex(8)
+		uri = URI.parse("http://172.16.21.12:28083/json_rpc")
+		request = Net::HTTP::Post.new(uri)
+			request.content_type = "application/json"
+			request.body = JSON.dump({
+			  "jsonrpc" => "2.0",
+			  "id" => "0",
+			  "method" => "make_integrated_address",
+			  "params" => {
+			    # "standard_address" => "55LTR8KniP4LQGJSPtbYDacR7dz8RBFnsfAKMaMuwUNYX6aQbBcovzDPyrQF9KXF9tVU6Xk3K8no1BywnJX6GvZX8yJsXvt",
+			    "payment_id" => a
+			  }
+			})
+
+			req_options = {
+			  use_ssl: uri.scheme == "https",
+			}
+			response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+			  http.request(request)
+			end
+      binding.pry
+      response = JSON.parse(response.body)
+      WalletAddress.create(integrated_address: response["result"]["integrated_address"],user_id: User.last.id)
+      redirect_to root_path
+	end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_120146) do
+ActiveRecord::Schema.define(version: 2018_10_29_053044) do
 
   create_table "users", force: :cascade do |t|
     t.string "address"
@@ -18,6 +18,14 @@ ActiveRecord::Schema.define(version: 2018_10_27_120146) do
     t.float "balance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "wallet_addresses", force: :cascade do |t|
+    t.string "integrated_address"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wallet_addresses_on_user_id"
   end
 
 end
