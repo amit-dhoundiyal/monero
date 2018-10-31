@@ -11,17 +11,18 @@
 <body>
 
 <div class="container" style="margin-top: 100px;">
-<center><a href="/address" class="btn btn-default">Generate Address</a></center>
+<center><a href="/wallet" class="btn btn-default">Generate Wallet Address</a></center>
  <div class="form-group">
       <label >Generated Wallet Address:</label>
       <input type="text" class="form-control"  placeholder="Address" value="<%= User.last&.address %>">
     </div>
 </div>
+
 <div class="container" style="margin-top: 100px;">
-<center><a href="/random_address" class="btn btn-default">Generate Address</a></center>
+<center><a href="/createaccount" class="btn btn-default">Generate Address</a></center>
  <div class="form-group">
       <label >Generated  Address:</label>
-      <input type="text" class="form-control"  placeholder="Address" value="<%= WalletAddress&.find_by(user_id: User.last&.id)&.integrated_address %>">
+      <input type="text" class="form-control"  placeholder="Address" value="<%= WalletAddress&.find_by(user_id: User.last&.id)&.address %>">
     </div>
 </div>
 <div class="container">

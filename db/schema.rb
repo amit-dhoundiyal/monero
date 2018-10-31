@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 2018_10_29_053044) do
   end
 
   create_table "wallet_addresses", force: :cascade do |t|
-    t.string "integrated_address"
+    t.string "address"
+    t.string "balance"
+    t.string "address_index"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
